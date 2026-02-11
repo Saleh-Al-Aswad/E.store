@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Product } from './product/product';
+import { ProductService } from './product-service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,6 @@ import { Product } from './product/product';
   styleUrl: './app.css'
 })
 export class App {
-  products = [
-  {name: 'pepsi bottle', price: 1.99, url: 'https://placehold.co/300x200' },
-  {name: 'cola bottle', price: 2.99, url: 'https://placehold.co/300x200' },
-  {name: 'fanta bottle', price: 0.99, url: 'https://placehold.co/300x200' },
-  {name: 'sprite bottle', price: 1.49, url: 'https://placehold.co/300x200' },
-  {name: 'mountain bottle', price: 1.99, url: 'https://placehold.co/300x200' }
-  ];
+ private productService = inject(ProductService);
+ products = this.productService.getProducts();
 }
